@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 function Login() {
@@ -55,22 +55,27 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <Link to="/" className="text-2xl font-bold text-primary-600 hover:text-primary-700 transition-colors">
+            FullStack PT
+          </Link>
+          <h2 className="mt-6 text-3xl font-bold text-gray-900">
             Iniciar Sesión
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Accede a tu cuenta
+          <p className="mt-2 text-gray-600">
+            Accede a tu cuenta para continuar
           </p>
         </div>
-        
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="card">
+
+        {/* Login Form */}
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
                   Usuario
                 </label>
                 <input
@@ -78,7 +83,7 @@ function Login() {
                   name="username"
                   type="text"
                   required
-                  className="input-field mt-1"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                   placeholder="Ingresa tu usuario"
                   value={formData.username}
                   onChange={handleChange}
@@ -87,7 +92,7 @@ function Login() {
               </div>
               
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                   Contraseña
                 </label>
                 <input
@@ -95,7 +100,7 @@ function Login() {
                   name="password"
                   type="password"
                   required
-                  className="input-field mt-1"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                   placeholder="Ingresa tu contraseña"
                   value={formData.password}
                   onChange={handleChange}
@@ -105,29 +110,36 @@ function Login() {
             </div>
 
             {error && (
-              <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+              <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
                 <p className="text-sm text-red-600">{error}</p>
               </div>
             )}
 
-            <div className="mt-6">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
-              </button>
-            </div>
-          </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+            </button>
 
-          <div className="text-center">
-            <p className="text-sm text-gray-600">
-              Usuario de prueba: <span className="font-medium">admin</span> | 
-              Contraseña: <span className="font-medium">admin123</span>
-            </p>
+            <div className="text-center">
+              <p className="text-sm text-gray-600">
+                Usuario de prueba: <span className="font-medium text-primary-600">admin</span> | 
+                Contraseña: <span className="font-medium text-primary-600">admin123</span>
+              </p>
+            </div>
+          </form>
+
+          <div className="mt-6 text-center">
+            <Link 
+              to="/" 
+              className="text-sm text-primary-600 hover:text-primary-700 transition-colors"
+            >
+              ← Volver al inicio
+            </Link>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   )
