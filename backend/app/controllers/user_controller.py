@@ -1,7 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from functools import wraps
 from app.services.auth_service import AuthService
-from app import app
 
 user_bp = Blueprint('user', __name__)
 
@@ -23,7 +22,7 @@ def jwt_required(f):
             return jsonify({'error': 'Token de autorización requerido'}), 401
         
         auth_service = AuthService()
-        user = auth_service.get_user_from_token(token, app.config['JWT_SECRET_KEY'])
+        user = auth_service.get_user_from_token(token, current_app.config['JWT_SECRET_KEY'])
         
         if not user:
             return jsonify({'error': 'Token inválido o expirado'}), 401

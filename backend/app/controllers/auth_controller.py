@@ -1,7 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from pydantic import BaseModel, ValidationError
 from app.services.auth_service import AuthService
-from app import app
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -29,8 +28,8 @@ def login():
         
         token = auth_service.create_access_token(
             user, 
-            app.config['JWT_SECRET_KEY'], 
-            app.config['JWT_ACCESS_TOKEN_EXPIRES']
+            current_app.config['JWT_SECRET_KEY'], 
+            current_app.config['JWT_ACCESS_TOKEN_EXPIRES']
         )
         
         return jsonify({
