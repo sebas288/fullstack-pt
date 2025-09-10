@@ -8,6 +8,10 @@ load_dotenv()
 
 db = SQLAlchemy()
 
+from app.controllers.auth_controller import auth_bp
+from app.controllers.user_controller import user_bp
+from app.controllers.health_controller import health_bp
+
 def create_app():
     """Factory function para crear la aplicación Flask"""
     app = Flask(__name__)
